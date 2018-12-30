@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+
+<launch>
+
+    <arg name="camera" default="/stereo"/>
+
+    <node pkg="viso2_ros" type="stereo_odometer" name="viso2_stereo_odometer" output="screen">
+
+        <remap from="stereo" to="$(arg camera)"/>
+        <remap from="image"  to="image_rect"/>
+
+        <param name="odom_frame_id"                value="/odom"/>
+        <param name="base_link_frame_id"           value="$(arg camera)"/>
+        <param name="publish_tf"                   value="true"/>
+        <param name="invert_tf"                    value="false"/>
+
+        <param name="queue_size"                   value="10"/>
+        <param name="approximate_sync"             value="true"/>
+        <param name="ref_frame_change_method"      value="1"/>
+        <param name="ref_frame_motion_threshold"   value="5"/>
+        <param name="ref_frame_inlier_threshold"   value="150"/>
+
+    </node>
+
+</launch>
+
