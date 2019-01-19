@@ -4,7 +4,7 @@
 
     <arg name="camera" default="/stereo"/>
 
-    <node pkg="viso2_ros" type="stereo_odometer" name="viso2_stereo_odometer" output="screen">
+    <node pkg="viso2_cg" type="stereo_odometer" name="viso2_stereo_odometer" output="screen">
 
         <remap from="stereo" to="$(arg camera)"/>
         <remap from="image"  to="image_rect"/>

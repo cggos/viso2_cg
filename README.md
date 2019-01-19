@@ -25,13 +25,11 @@ Modified version of LIBVISO2 downloaded from [this](http://www.cvlibs.net/downlo
 ## Build C++ Code
 
 * plain cmake (No ROS)
-  - `set(USE_ROS FALSE)` in `libviso2/CMakeLists.txt` file
-  - `cd libviso2 & mkdir build & cd build & cmake .. & make`
+  - `cd viso2_cg/viso2 & mkdir build & cd build & cmake .. -DBUILD_DEMO=true & make`
   - Run `./viso2 path/to/sequence/2010_03_09_drive_0019`
 * With ROS
-  - `set(USE_ROS TRUE)` in `libviso2/CMakeLists.txt` file
-  - `cd <catkin-workspace> & catkin_make`
-  - `roslaunch viso2_ros <launch-file>`
+  - `catkin_make` or `catkin build viso2_cg`
+  - `roslaunch viso2_cg <launch-file>`
 
 # Coordinate System Definition
 
@@ -42,6 +40,7 @@ Modified version of LIBVISO2 downloaded from [this](http://www.cvlibs.net/downlo
 # Dataset
 
 * [Karlsruhe Dataset](http://www.cvlibs.net/datasets/karlsruhe_sequences/): Stereo Video Sequences + rough GPS Poses
+* [viso2 sample bagfiles](http://srv.uib.es/public/viso2_ros/sample_bagfiles/)
 
 # Papers
 

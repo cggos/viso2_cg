@@ -6,7 +6,7 @@
 
 #include <viso_stereo.h>
 
-#include <viso2_ros/VisoInfo.h>
+#include "viso2_cg/VisoInfo.h"
 
 #include "stereo_processor.h"
 #include "odometer_base.h"
@@ -55,7 +55,7 @@ namespace viso2_ros {
             local_nh.param("ref_frame_inlier_threshold", ref_frame_inlier_threshold_, 150);
 
             point_cloud_pub_ = local_nh.advertise<PointCloud>("point_cloud", 1);
-            info_pub_        = local_nh.advertise<VisoInfo>("info", 1);
+            info_pub_        = local_nh.advertise<viso2_cg::VisoInfo>("info", 1);
 
             reference_motion_ = Matrix::eye(4);
         }
@@ -224,7 +224,7 @@ namespace viso2_ros {
                     ROS_DEBUG_STREAM("Changing reference frame");
 
                 // create and publish viso2 info msg
-                VisoInfo info_msg;
+                viso2_cg::VisoInfo info_msg;
                 info_msg.header.stamp = l_image_msg->header.stamp;
                 info_msg.got_lost = !success;
                 info_msg.change_reference_frame = !change_reference_frame_;

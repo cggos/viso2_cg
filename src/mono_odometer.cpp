@@ -7,7 +7,7 @@
 
 #include <viso_mono.h>
 
-#include <viso2_ros/VisoInfo.h>
+#include "viso2_cg/VisoInfo.h"
 
 #include "odometer_base.h"
 #include "odometry_params.h"
@@ -37,7 +37,7 @@ namespace viso2_ros {
             image_transport::ImageTransport it(nh);
             camera_sub_ = it.subscribeCamera("image", 1, &MonoOdometer::imageCallback, this, transport);
 
-            info_pub_ = local_nh.advertise<VisoInfo>("info", 1);
+            info_pub_ = local_nh.advertise<viso2_cg::VisoInfo>("info", 1);
         }
 
     protected:
@@ -129,7 +129,7 @@ namespace viso2_ros {
                 }
 
                 // create and publish viso2 info msg
-                VisoInfo info_msg;
+                viso2_cg::VisoInfo info_msg;
                 info_msg.header.stamp = image_msg->header.stamp;
                 info_msg.got_lost = !success;
                 info_msg.change_reference_frame = false;
