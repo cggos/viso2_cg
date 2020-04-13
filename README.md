@@ -32,7 +32,7 @@ Modified version of LIBVISO2 downloaded from [this](http://www.cvlibs.net/downlo
 
 * With ROS
   - `catkin_make` or `catkin build viso2_cg`
-  - `roslaunch viso2_cg demo.launch [rviz:=true]`
+  - `roslaunch viso2_cg demo_stereo.launch [rviz:=true]`
 
 # Coordinate System Definition
 
