@@ -2,10 +2,14 @@
 
 <launch>
 
-    <arg name="camera" default="/stereo"/>
+    <arg name="camera" default="/stereo_rect"/>
+    <arg name="rviz"    default="true"/>
+
+    <group if="$(arg rviz)">
+        <node pkg="rviz" type="rviz" name="rviz" args="-d $(find viso2_cg)/launch/viso2.rviz"/>
+    </group>
 
     <node pkg="viso2_cg" type="stereo_odometer" name="viso2_stereo_odometer" output="screen">
-
         <remap from="stereo" to="$(arg camera)"/>
         <remap from="image"  to="image_rect"/>
 
@@ -19,7 +23,6 @@
         <param name="ref_frame_change_method"      value="1"/>
         <param name="ref_frame_motion_threshold"   value="5"/>
         <param name="ref_frame_inlier_threshold"   value="150"/>
-
     </node>
 
 </launch>

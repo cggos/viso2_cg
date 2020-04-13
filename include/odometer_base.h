@@ -4,6 +4,7 @@
 
 #include <ros/ros.h>
 #include <nav_msgs/Odometry.h>
+#include <nav_msgs/Path.h>
 #include <std_srvs/Empty.h>
 
 #include <tf/transform_listener.h>
@@ -40,6 +41,7 @@ namespace viso2_ros {
 
             odom_pub_ = local_nh.advertise<nav_msgs::Odometry>("odometry", 1);
             pose_pub_ = local_nh.advertise<geometry_msgs::PoseStamped>("pose", 1);
+            path_pub_ = local_nh.advertise<nav_msgs::Path>("path", 10);
 
             reset_service_ = local_nh.advertiseService("reset_pose", &OdometerBase::resetPose, this);
 
@@ -165,6 +167,11 @@ namespace viso2_ros {
 
             pose_pub_.publish(pose_msg);
 
+            path_msg_.header.stamp    = pose_msg.header.stamp;
+            path_msg_.header.frame_id = pose_msg.header.frame_id;
+            path_msg_.poses.push_back(pose_msg);
+            path_pub_.publish(path_msg_);
+
             if (publish_tf_) {
 
                 if (invert_tf_)
@@ -189,6 +196,9 @@ namespace viso2_ros {
         // publisher
         ros::Publisher odom_pub_;
         ros::Publisher pose_pub_;
+        ros::Publisher path_pub_;
+
+        nav_msgs::Path path_msg_;
 
         ros::ServiceServer reset_service_;
 
