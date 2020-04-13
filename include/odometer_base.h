@@ -63,7 +63,8 @@ namespace viso2_ros {
             double qz = tf.getRotation().getZ();
             double qw = tf.getRotation().getW();
 
-            ROS_DEBUG("%s tf : (%f, %f, %f, %f, %f, %f, %f)", str.c_str(), px, py, pz, qx, qy, qz, qw);
+            ROS_INFO("[cggos %s] %s tf : (%f, %f, %f, %f, %f, %f, %f)", 
+                     __FUNCTION__, str.c_str(), px, py, pz, qx, qy, qz, qw);
         }
 
     protected:
@@ -115,11 +116,11 @@ namespace viso2_ros {
                 base_to_sensor.setIdentity();
             }
 
-            printTF_XYZQuat(base_to_sensor, "base_to_sensor");
-
             // Question: why multiply from left to right?
             tf::Transform base_transform = base_to_sensor * integrated_pose_ * base_to_sensor.inverse();
 
+            // printTF_XYZQuat(delta_transform, "delta_transform");
+            // printTF_XYZQuat(base_to_sensor, "base_to_sensor");
             printTF_XYZQuat(base_transform, "publish base_transform");
 
             nav_msgs::Odometry odometry_msg;

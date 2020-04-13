@@ -172,8 +172,6 @@ namespace viso2_ros {
                     setPoseCovariance(STANDARD_POSE_COVARIANCE);
                     setTwistCovariance(STANDARD_TWIST_COVARIANCE);
 
-                    printTF_XYZQuat(delta_transform, "delta_transform");
-
                     integrateAndPublish(delta_transform, l_image_msg->header.stamp);
 
                     if (point_cloud_pub_.getNumSubscribers() > 0)
