@@ -2,3 +2,4 @@
 .catkin_tools/
 cmake-build-debug/
 build/
+.vscode/
